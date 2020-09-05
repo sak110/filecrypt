@@ -10,3 +10,7 @@ def clear_screen():
         subprocess.Popen("cls", shell=True).communicate() 
     else: #clear screen for Linux and Mac
         print("\033c", end="")
+
+if __name__ == '__main__':
+    print("Run main.py !!!")
+    pass
