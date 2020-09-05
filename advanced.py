@@ -1,3 +1,4 @@
+from Crypto.Hash import SHA256
 import pyAesCrypt
 import time
 import custom
