@@ -75,7 +75,7 @@ def decrypt():
     encrypted_file_size = os.stat(file_name).st_size # get encrypted file size
     with open(file_name, "rb") as input_file:
         try:
-            with open(file_name, "wb") as output_file:
+            with open(output_file_name, "wb") as output_file:
                 pyAesCrypt.decryptStream(input_file, output_file, passphrase, bufferSize, encrypted_file_size)
         except ValueError:
             os.remove(output_file_name) # remove output file on error
