@@ -10,6 +10,7 @@ def level():
         print()
     print('1. BASIC')
     print('2. ADVANCED')
+    print('0. EXIT')
     print('Enter your choice and press enter :', end = ' ')
     choice = int(input())
     custom.clear_screen()
@@ -21,6 +22,10 @@ def level():
         elif choice == 2:
             loop_control = False
             advanced.start()
+        elif choice == 0:
+            loop_control = False
+            custom.clear_screen()
+            custom.exit_warning()
         else:
             print("ERROR : Please choose a valid option")
             time.sleep(2)
