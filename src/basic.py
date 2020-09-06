@@ -19,7 +19,10 @@ def basic_mode():
     print('9. Back')
     print('0. Exit')
     print('Enter your choice :', end = ' ')
-    choice = int(input())
+    try:
+        choice = int(input())
+    except ValueError:
+        basic_mode()
     custom.clear_screen
     loop_control = True
     while(loop_control):

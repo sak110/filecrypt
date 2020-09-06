@@ -12,7 +12,10 @@ def level():
     print('2. ADVANCED')
     print('0. EXIT')
     print('Enter your choice and press enter :', end = ' ')
-    choice = int(input())
+    try:
+        choice = int(input())
+    except ValueError:
+        level()
     custom.clear_screen()
     loop_control = True
     while(loop_control):
