@@ -25,11 +25,11 @@ def basic_mode():
     custom.clear_screen
     loop_control = True
     while(loop_control):
-        if choice == 1:
+        if choice == 1 or 2:
             loop_control = False
             custom.clear_screen()
             encrypt()
-        elif choice == 3:
+        elif choice == 3 or 4:
             loop_control = False
             custom.clear_screen()
             decrypt()
