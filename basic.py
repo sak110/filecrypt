@@ -11,7 +11,7 @@ def start():
 def basic_mode():
     print('-----------------------------------FILE MANAGER---------------------------------')
     print('---------------------------------------BASIC------------------------------------')
-    for i in range (18):
+    for i in range (17):
         print()
     print('1. Encrypt')
     print('2. Decrypt')

@@ -6,7 +6,7 @@ import custom
 def level():
     print('-----------------------------------FILE MANAGER---------------------------------')
     print('--------------------------------------OPTIONS-----------------------------------')
-    for i in range (19):
+    for i in range (18):
         print()
     print('1. BASIC')
     print('2. ADVANCED')
