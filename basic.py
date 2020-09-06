@@ -11,13 +11,16 @@ def start():
 def basic_mode():
     print('-----------------------------------FILE MANAGER---------------------------------')
     print('---------------------------------------BASIC------------------------------------')
-    for i in range (17):
+    for i in range (15):
         print()
     print('1. Encrypt')
-    print('2. Decrypt')
+    print('2. Encrypt and delete the original file')
+    print('3. Decrypt')
+    print('4. Decrypt and delete the encrypted file')
     print('9. Back')
     print('0. Exit')
     print('Enter your choice :', end = ' ')
+    global choice
     choice = int(input())
     custom.clear_screen
     loop_control = True
@@ -26,14 +29,14 @@ def basic_mode():
             loop_control = False
             custom.clear_screen()
             encrypt()
-        elif choice == 2:
+        elif choice == 3:
             loop_control = False
             custom.clear_screen()
             decrypt()
         elif choice == 9:
             loop_control = False
             custom.clear_screen()
-            main.level()
+            main.level() #fix required
         elif choice == 0:
             loop_control = False
             custom.clear_screen()
@@ -56,6 +59,8 @@ def encrypt():
     with open(file_name, "rb") as input_file:
         with open(output_file_name, "wb") as output_file:
             pyAesCrypt.encryptStream(input_file, output_file, passphrase, bufferSize)
+    if choice == 2:
+        os.remove(file_name)
     print('Encryption successfull !!!')
     print('Output file : {}'.format(output_file_name))
     time.sleep(3)
@@ -79,6 +84,8 @@ def decrypt():
                 pyAesCrypt.decryptStream(input_file, output_file, passphrase, bufferSize, encrypted_file_size)
         except ValueError:
             os.remove(output_file_name) # remove output file on error
+    if choice == 4:
+        os.remove(file_name)
     print('Decryption successfull !!!')
     print('Output file : {}'.format(output_file_name))
     time.sleep(3)
