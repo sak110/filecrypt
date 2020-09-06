@@ -1,5 +1,2 @@
-crypto==1.4.1
-cryptography==2.8
 pyAesCrypt==0.4.3
 pycrypto==2.6.1
-QtPy==1.9.0
