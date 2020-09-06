@@ -24,6 +24,7 @@ def exit_warning():
     if choice == 'n':
          main.level()
     else:
+        clear_screen()
         exit()
 
 def file_error():
