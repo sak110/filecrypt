@@ -5,6 +5,8 @@ import os
 import custom
 import main
 
+choice = 1 #To stop vs from telling that choice is not global
+
 def start():
     basic_mode()
 
