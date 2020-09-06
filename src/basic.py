@@ -58,13 +58,23 @@ def encrypt():
     bufferSize = 64 * 1024
     output_file_name = file_name + ".aes"
     #key = sha256_crypt.hash(passphrase)
+    start = 0
+    end = 0
     try :
         with open(file_name, "rb") as input_file:
             with open(output_file_name, "wb") as output_file:
+                start = time.time()
                 pyAesCrypt.encryptStream(input_file, output_file, passphrase, bufferSize)
+                end = time.time()
+        total_time = end - start
         print('Encryption successfull !!!')
-        print('Output file : {}'.format(output_file_name), end = '')
-        time.sleep(3)
+        print('Output file : {}   Time taken : {} sec'.format(output_file_name, total_time), end = '')
+        try:
+            input()
+            basic_mode()
+        except ValueError:
+            basic_mode()
+        #time.sleep(3)
         custom.clear_screen()
         basic_mode()
     except FileNotFoundError:
@@ -84,16 +94,26 @@ def decrypt():
     #output_file_name = file_name - '.aes'
     encrypted_file_size = os.stat(file_name).st_size # get encrypted file size
     #key = sha256_crypt.hash(passphrase)
+    start = 0
+    end = 0
     try:
         with open(file_name, "rb") as input_file:
             try:
                 with open(output_file_name, "wb") as output_file:
+                    start = time.time()
                     pyAesCrypt.decryptStream(input_file, output_file, passphrase, bufferSize, encrypted_file_size)
+                    end = time.time()
             except ValueError:
                 os.remove(output_file_name) # remove output file if its empty
+        total_time = end - start
         print('Decryption successfull !!!')
-        print('Output file : {}'.format(output_file_name), end = '')
-        time.sleep(3)
+        print('Output file : {}   Time taken : {} sec'.format(output_file_name, total_time), end = '')
+        try:
+            input()
+            basic_mode()
+        except ValueError:
+            basic_mode()
+        #time.sleep(3)
         custom.clear_screen()
         basic_mode()
     except FileNotFoundError:
