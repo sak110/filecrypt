@@ -53,19 +53,24 @@ def encrypt():
     for i in range (18):
         print()
     file_name = input('Enter the file name : ')
-    passphrase = input('Enter the passphrase to encrypt the file with : ')
+    passphrase = input('Enter the passphrase : ')
     bufferSize = 64 * 1024
     output_file_name = file_name + ".aes"
-    with open(file_name, "rb") as input_file:
-        with open(output_file_name, "wb") as output_file:
-            pyAesCrypt.encryptStream(input_file, output_file, passphrase, bufferSize)
-    if choice == 2:
-        os.remove(file_name)
-    print('Encryption successfull !!!')
-    print('Output file : {}'.format(output_file_name))
-    time.sleep(3)
-    custom.clear_screen()
-    basic_mode()
+    try :
+        with open(file_name, "rb") as input_file:
+            with open(output_file_name, "wb") as output_file:
+                pyAesCrypt.encryptStream(input_file, output_file, passphrase, bufferSize)
+        if choice == 2:
+            os.remove(file_name)
+        print('Encryption successfull !!!')
+        print('Output file : {}'.format(output_file_name))
+        time.sleep(3)
+        custom.clear_screen()
+        basic_mode()
+    except FileNotFoundError:
+        custom.file_error()
+        print()
+        start()
 
 def decrypt():
     print('-----------------------------------FILE MANAGER---------------------------------')
@@ -78,19 +83,25 @@ def decrypt():
     output_file_name = file_name.replace('.aes', '')
     #output_file_name = file_name - '.aes'
     encrypted_file_size = os.stat(file_name).st_size # get encrypted file size
-    with open(file_name, "rb") as input_file:
-        try:
-            with open(output_file_name, "wb") as output_file:
-                pyAesCrypt.decryptStream(input_file, output_file, passphrase, bufferSize, encrypted_file_size)
-        except ValueError:
-            os.remove(output_file_name) # remove output file on error
-    if choice == 4:
-        os.remove(file_name)
-    print('Decryption successfull !!!')
-    print('Output file : {}'.format(output_file_name))
-    time.sleep(3)
-    custom.clear_screen()
-    basic_mode()
+    try:
+        with open(file_name, "rb") as input_file:
+            try:
+                with open(output_file_name, "wb") as output_file:
+                    pyAesCrypt.decryptStream(input_file, output_file, passphrase, bufferSize, encrypted_file_size)
+            except ValueError:
+                os.remove(output_file_name) # remove output file if its empty
+        if choice == 4:
+            os.remove(file_name)
+        print('Decryption successfull !!!')
+        print('Output file : {}'.format(output_file_name))
+        time.sleep(3)
+        custom.clear_screen()
+        basic_mode()
+    except FileNotFoundError:
+        custom.clear_screen()
+        custom.file_error()
+        print()
+        start()
 
 if __name__ == '__main__':
     print("Run main.py !!!")
