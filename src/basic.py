@@ -1,5 +1,6 @@
-from passlib.hash import sha256_crypt
 import pyAesCrypt
+import hashlib
+import base64
 import time
 import os
 import custom
@@ -48,6 +49,10 @@ def basic_mode():
             custom.clear_screen()
             basic_mode()
 
+def key_pass( __password, __salt=''):
+       key = hashlib.pbkdf2_hmac('sha256', __password.encode('utf-8'), __salt.encode('utf-8'), 1000, dklen=32)
+       return base64.b64encode(key)
+
 def encrypt():
     print('-----------------------------------FILE MANAGER---------------------------------')
     print('------------------------------------ENCRYPTION----------------------------------')
@@ -57,14 +62,14 @@ def encrypt():
     passphrase = input('Enter the passphrase : ')
     bufferSize = 64 * 1024
     output_file_name = file_name + ".aes"
-    #key = sha256_crypt.hash(passphrase)
+    key = key_pass(passphrase)
     start = 0
     end = 0
     try :
         with open(file_name, "rb") as input_file:
             with open(output_file_name, "wb") as output_file:
                 start = time.time()
-                pyAesCrypt.encryptStream(input_file, output_file, passphrase, bufferSize)
+                pyAesCrypt.encryptStream(input_file, output_file, key.hex(), bufferSize)
                 end = time.time()
         total_time = end - start
         print('Encryption successfull !!!')
@@ -93,7 +98,7 @@ def decrypt():
     output_file_name = file_name.replace('.aes', '')
     #output_file_name = file_name - '.aes'
     encrypted_file_size = os.stat(file_name).st_size # get encrypted file size
-    #key = sha256_crypt.hash(passphrase)
+    key = key_pass(passphrase)
     start = 0
     end = 0
     try:
@@ -101,7 +106,7 @@ def decrypt():
             try:
                 with open(output_file_name, "wb") as output_file:
                     start = time.time()
-                    pyAesCrypt.decryptStream(input_file, output_file, passphrase, bufferSize, encrypted_file_size)
+                    pyAesCrypt.decryptStream(input_file, output_file, key.hex(), bufferSize, encrypted_file_size)
                     end = time.time()
             except ValueError:
                 os.remove(output_file_name) # remove output file if its empty

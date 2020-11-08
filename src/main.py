@@ -2,23 +2,25 @@ import time
 import basic
 import advanced
 import custom
+from gooey import Gooey, GooeyParser
+
 
 def level():
     print('-----------------------------------FILE MANAGER---------------------------------')
     print('--------------------------------------OPTIONS-----------------------------------')
-    for i in range (18):
+    for i in range(18):
         print()
     print('1. BASIC')
     print('2. ADVANCED')
     print('0. EXIT')
-    print('Enter your choice and press enter :', end = ' ')
+    print('Enter your choice and press enter :', end=' ')
     try:
         choice = int(input())
     except ValueError:
         level()
     custom.clear_screen()
     loop_control = True
-    while(loop_control):
+    while (loop_control):
         if choice == 1:
             loop_control = False
             basic.start()
@@ -35,21 +37,24 @@ def level():
             custom.clear_screen()
             level()
 
+
 def welcome():
-    #print('--------------------------------------------------------------------------------') window width template
+    # print('--------------------------------------------------------------------------------') window width template
     print('-------------------------------------WELCOME------------------------------------')
     print('---------------------------------TO FILE MANAGER--------------------------------')
-    for i in range (21):
+    for i in range(21):
         print()
-    print('press any key to continue', end = '')
+    print('press any key to continue', end='')
     input()
     custom.clear_screen()
     level()
 
-def main ():
+
+@Gooey
+def main():
     custom.clear_screen()
     welcome()
 
+
 if __name__ == '__main__':
     main()
-
