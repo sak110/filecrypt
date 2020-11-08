@@ -17,7 +17,7 @@ def basic_mode():
         print()
     print('1. Encrypt')
     print('2. Decrypt')
-    print('9. Back')
+    # print('9. Back')
     print('0. Exit')
     print('Enter your choice :', end = ' ')
     try:
@@ -35,10 +35,10 @@ def basic_mode():
             loop_control = False
             custom.clear_screen()
             decrypt()
-        elif choice == 9:
-            loop_control = False
-            custom.clear_screen()
-            main.level() #fix required
+        # elif choice == 9:
+        #     loop_control = False
+        #     custom.clear_screen()
+        #     main.welcome()
         elif choice == 0:
             loop_control = False
             custom.clear_screen()

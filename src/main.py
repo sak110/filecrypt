@@ -1,8 +1,7 @@
 import time
 import basic
-import advanced
 import custom
-from gooey import Gooey, GooeyParser
+
 
 
 def level():
@@ -47,10 +46,10 @@ def welcome():
     print('press any key to continue', end='')
     input()
     custom.clear_screen()
-    level()
+    basic.start()
 
 
-@Gooey
+
 def main():
     custom.clear_screen()
     welcome()
