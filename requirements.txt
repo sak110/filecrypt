@@ -1,2 +1,0 @@
-pyAesCrypt==0.4.3
-pycrypto==2.6.1
